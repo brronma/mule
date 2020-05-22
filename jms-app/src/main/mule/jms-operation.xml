@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="d38c9c54-970f-4ce5-b74b-1df6e00d6029" basePath="jms-operation" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="jms-operationFlow" doc:id="17439bd6-ac0f-4d4b-9445-021077b4a1fd" >
+		<http:listener doc:name="emp-jms-Listener" doc:id="dbfb7113-10bb-4337-a4b4-30edacae46ea" config-ref="HTTP_Listener_config" path="add-emp"/>
+		<logger level="INFO" doc:name="start Log" doc:id="9b9a34ab-f2bf-4bbc-bc43-f30cd7a97f17" message="add-emp flow started:#[payload]"/>
+		<jms:publish doc:name="Publish" doc:id="11fb4e5c-d220-4437-9029-b11a56234734" config-ref="JMS_Config1" destination="Q.FSD.EMP"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8bb22496-852f-46f3-918b-db9b5388dea0"/>
+	</flow>
+</mule>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd">
+	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="82d663f6-1b6f-47c9-a64f-06ca4cec6595" >
+		<jms:active-mq-connection username="admin" password="admin" >
+			<jms:factory-configuration brokerUrl="tcp://localhost:61616" />
+		</jms:active-mq-connection>
+	</jms:config>
+	<jms:config name="JMS_Config1" doc:name="JMS Config" doc:id="2952cb0a-048e-4208-a878-8a8749eaa8ad" >
+		<jms:active-mq-connection username="admin" password="admin" >
+			<jms:factory-configuration brokerUrl="tcp://localhost:61616" />
+		</jms:active-mq-connection>
+	</jms:config>
+	<flow name="jms-appFlow" doc:id="6c0509e7-adeb-400f-8fbe-df944573000c" >
+		<jms:listener doc:name="Listener" doc:id="1772acba-d46c-49d2-8531-f8f62709078d" config-ref="JMS_Config1" destination="Q.FSD.EMP">
+		</jms:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="79979904-fb59-4495-93ae-85ad7af5092d" message="flow ends:#[payload]"/>
+	</flow>
+</mule>
